@@ -1,48 +1,47 @@
-#define stepPin_1 2
-#define stepPin_2 3
-#define stepPin_3 4
-#define dirPin_1 5
-#define dirPin_2 6
-#define dirPin_3 7
-#define servoPin_end 8
-#define servoPin_gripper 9
+#define stepPin_1 2 // BASE
+#define stepPin_2 3 // shoulder
+#define stepPin_3 4 // ELBOW
+#define dirPin_1 5 // influces direction of Base Motor
+#define dirPin_2 6 // influces direction of Shoulder Motor
+#define dirPin_3 7 // influces direction of Elbow Motor
+#define enaPin_1 10 //influences free drive of Base Motor
+#define enaPin_2 11 //influences free drive of Shoulder Motor
+#define enaPin_3 12 //influences free drive of Elbow Motor
+#define servoPin_end 8 // servo MG995
+#define servoPin_gripper 9 // Micro servo motor 
+unsigned long current_millis = 0;
+unsigned long previous_millis = 0;
+volatile float delta;
 
 void setup() {
   // put your setup code here, to run once:
-  pinMode(servoPin_gripper, OUTPUT);
-  pinMode(servoPin_end, OUTPUT);
   pinMode(stepPin_1, OUTPUT);
   pinMode(stepPin_2, OUTPUT);
   pinMode(stepPin_3, OUTPUT);
   pinMode(dirPin_1, OUTPUT);
   pinMode(dirPin_2, OUTPUT);
   pinMode(dirPin_3, OUTPUT);
-  serial.begin(9600);
+   pinMode(enaPin_1, OUTPUT);
+  pinMode(enaPin_2, OUTPUT);
+  pinMode(enaPin_3, OUTPUT);
+  pinMode(servoPin_end, OUTPUT);
+  pinMode(servoPin_gripper, OUTPUT);
+  Serial.begin(9600);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  digitalWrite(sigPinser_1, HIGH);
-  
-  
-}
-const int servoPin = 9; // Pin connected to the servo signal
-void setup() {
-  pinMode(servoPin, OUTPUT); // Set servo pin as an output
-}
 
-void loop() {
-  // Move servo to 0 degrees
-  writeServo(servoPin, 0);
-  millis(1000); // Wait 1 second
+  
+  writeServo(servoPin_gripper, 0);             // Move servo to 0 degrees
+ //millis(1000); // Wait 1 second
 
   // Move servo to 90 degrees
-  writeServo(servoPin, 90);
-  millis(1000); // Wait 1 second
+  writeServo(servoPin_gripper, 90);
+  //millis(1000); // Wait 1 second
 
   // Move servo to 180 degrees
-  writeServo(servoPin, 180);
-  millis(1000); // Wait 1 second
+  writeServo(servoPin_gripper, 180);
+  //millis(1000); // Wait 1 second
 }
 
 void writeServo(int pin, int angle) {
